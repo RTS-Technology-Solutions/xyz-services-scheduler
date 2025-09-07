@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduling Wireframe</title>
+    <!-- Tailwind CSS for utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 500px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- 1. Header (Top of Page) -->
+    <header class="bg-white shadow-md p-4">
+        <nav class="container mx-auto flex items-center justify-between">
+            <!-- Logo Placeholder -->
+            <div class="w-32 h-10 bg-gray-200 rounded-lg flex items-center justify-center text-sm font-semibold">
+                Logo
+            </div>
+
+            <!-- Navigation Menu -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors" title="This link will navigate to the Services page.">Services</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors" title="This link will navigate to the About Us page.">About Us</a>
+                <button id="nav-schedule-btn" class="bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-700 transition-colors">
+                    Schedule Now
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- 2. Hero Section (Below Header) -->
+        <section id="hero-section" class="text-center py-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Book Your Appointment Today.</h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-8">Choose your service and find a time that works for you.</p>
+            <button id="start-scheduling-btn" class="bg-gray-800 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-700 transition-colors">
+                Start Scheduling
+            </button>
+        </section>
+
+        <!-- New section with business information -->
+        <section class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-lg mt-10 text-center">
+            <h2 class="text-2xl font-bold mb-4">A Professional and Friendly Service</h2>
+            <p class="text-gray-700 leading-relaxed">
+                As a licensed provider in our service category, we are committed to offering a professional, friendly, and knowledgeable experience for every client. We understand the importance of your time and needs, which is why we are dedicated to answering all your questions and ensuring you are prepared and confident about your appointment. Your satisfaction is our top priority.
+            </p>
+        </section>
+        
+        <!-- 3. Scheduling Flow (Main Content Area) -->
+        <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-lg mt-10">
+
+            <!-- Step 1: Select Service -->
+            <section id="step-1" class="hidden">
+                <h2 class="text-2xl font-bold mb-6">1. Choose a Service</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Service Card 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-lg mb-2">Service Name</h3>
+                        <p class="text-sm text-gray-500 mb-4">Short description of the service and its benefits.</p>
+                        <button class="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 transition-colors book-now-btn" data-service="Service Name">
+                            Book Now
+                        </button>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-lg mb-2">Service Name</h3>
+                        <p class="text-sm text-gray-500 mb-4">Short description of the service and its benefits.</p>
+                        <button class="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 transition-colors book-now-btn" data-service="Service Name">
+                            Book Now
+                        </button>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-lg mb-2">Service Name</h3>
+                        <p class="text-sm text-gray-500 mb-4">Short description of the service and its benefits.</p>
+                        <button class="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 transition-colors book-now-btn" data-service="Service Name">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Select Date & Time -->
+            <section id="step-2" class="hidden">
+                <h2 class="text-2xl font-bold mb-6">2. Select a Date & Time</h2>
+                <!-- Calendar Container -->
+                <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="bg-gray-200 text-gray-600 p-2 rounded-full hover:bg-gray-300 transition-colors">&lt;</button>
+                        <span class="text-lg font-semibold">Week/Month</span>
+                        <button class="bg-gray-200 text-gray-600 p-2 rounded-full hover:bg-gray-300 transition-colors">&gt;</button>
+                    </div>
+                    <!-- Calendar Grid Placeholder -->
+                    <div class="grid grid-cols-7 gap-2 text-center text-sm mb-6">
+                        <span class="text-gray-500">Sun</span>
+                        <span class="text-gray-500">Mon</span>
+                        <span class="text-gray-500">Tue</span>
+                        <span class="text-gray-500">Wed</span>
+                        <span class="text-gray-500">Thu</span>
+                        <span class="text-gray-500">Fri</span>
+                        <span class="text-gray-500">Sat</span>
+                        <!-- Example Calendar Day -->
+                        <div class="py-2 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer">1</div>
+                        <div class="py-2 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer">2</div>
+                        <div class="py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 cursor-pointer">3</div>
+                        <div class="py-2 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer">4</div>
+                        <div class="py-2 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer">5</div>
+                        <div class="py-2 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer">6</div>
+                        <div class="py-2 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer">7</div>
+                        <!-- ... more dates -->
+                    </div>
+                </div>
+                <!-- Time Slots Placeholder -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button class="bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition-colors time-slot-btn" data-time="9:00 AM">9:00 AM</button>
+                    <button class="bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition-colors time-slot-btn" data-time="10:30 AM">10:30 AM</button>
+                    <button class="bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition-colors time-slot-btn" data-time="1:00 PM">1:00 PM</button>
+                    <button class="bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition-colors time-slot-btn" data-time="2:30 PM">2:30 PM</button>
+                </div>
+                <button id="back-to-step1-btn" class="bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-500 transition-colors mt-6">
+                    Go Back
+                </button>
+                <button id="next-to-step3-btn" class="bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-700 transition-colors mt-6">
+                    Next
+                </button>
+            </section>
+
+            <!-- Step 3: Appointment Details & Confirmation -->
+            <section id="step-3" class="hidden">
+                <h2 class="text-2xl font-bold mb-6">3. Confirm Your Appointment</h2>
+                <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6">
+                    <h3 class="font-semibold text-lg mb-2">Appointment Summary</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li><span class="font-medium">Service:</span> <span id="summary-service">Service Name</span></li>
+                        <li><span class="font-medium">Date & Time:</span> <span id="summary-date-time">Month Day, Year at Time</span></li>
+                        <li><span class="font-medium">Duration:</span> <span id="summary-duration">60 minutes</span></li>
+                        <li><span class="font-medium">Staff Member:</span> <span id="summary-staff">Jane Doe</span></li>
+                    </ul>
+                </div>
+
+                <form class="space-y-4">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2">
+                    </div>
+                    <button id="back-to-step2-btn" class="bg-gray-400 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-500 transition-colors">
+                        Go Back
+                    </button>
+                    <button id="confirm-btn" type="submit" class="bg-gray-800 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-700 transition-colors">
+                        Confirm & Book
+                    </button>
+                </form>
+            </section>
+
+            <!-- 4. Appointment Confirmation (Success Page) -->
+            <section id="success" class="hidden text-center">
+                <h2 class="text-2xl font-bold mb-4">Appointment Confirmed!</h2>
+                <p class="text-gray-600 mb-6">Thank you for booking with us. An email with all the details has been sent to you.</p>
+
+                <div class="text-left bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold text-lg mb-4">Appointment Details & Preparation</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-medium mb-1">What to Expect</p>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li>Directions and parking information.</li>
+                                <li>Check-in process.</li>
+                                <li>Who to speak with upon arrival.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-medium mb-1">How to Prepare</p>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li>List of items to bring.</li>
+                                <li>Pre-appointment instructions.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="add-to-calendar-btn" class="bg-gray-800 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-700 transition-colors mt-6">
+                    Add to Calendar
+                </button>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- 5. Footer (Bottom of Page) -->
+    <footer class="bg-gray-900 text-white p-8 mt-10">
+        <div class="container mx-auto text-center text-sm">
+            <div class="mb-4">
+                <p class="mb-2">Contact Us:</p>
+                <p>Email: contact@business.com</p>
+                <p>Phone: (555) 555-5555</p>
+            </div>
+            <div class="mb-4">
+                <!-- Social Media Icons Placeholder -->
+                <span class="text-gray-400">Socials: [Icon 1] [Icon 2]</span>
+            </div>
+            <div class="text-gray-400">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a> |
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for "buttons to nowhere" -->
+    <div id="modal-container" class="modal-overlay hidden">
+        <div class="modal-content text-center">
+            <h3 class="text-xl font-bold mb-4">Additional Functionality</h3>
+            <p class="text-gray-600 mb-6" id="modal-message"></p>
+            <button id="modal-close-btn" class="bg-gray-800 text-white font-semibold py-2 px-6 rounded-lg hover:bg-gray-700 transition-colors">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroSection = document.getElementById('hero-section');
+            const step1 = document.getElementById('step-1');
+            const step2 = document.getElementById('step-2');
+            const step3 = document.getElementById('step-3');
+            const success = document.getElementById('success');
+
+            const startSchedulingBtn = document.getElementById('start-scheduling-btn');
+            const navScheduleBtn = document.getElementById('nav-schedule-btn');
+            const bookNowBtns = document.querySelectorAll('.book-now-btn');
+            const nextToStep3Btn = document.getElementById('next-to-step3-btn');
+            const confirmBtn = document.getElementById('confirm-btn');
+            const backToStep1Btn = document.getElementById('back-to-step1-btn');
+            const backToStep2Btn = document.getElementById('back-to-step2-btn');
+            const addToCalendarBtn = document.getElementById('add-to-calendar-btn');
+
+            const modalContainer = document.getElementById('modal-container');
+            const modalMessage = document.getElementById('modal-message');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+
+            // Function to show a specific section and hide all others
+            function showSection(sectionToShow) {
+                heroSection.classList.add('hidden');
+                step1.classList.add('hidden');
+                step2.classList.add('hidden');
+                step3.classList.add('hidden');
+                success.classList.add('hidden');
+                sectionToShow.classList.remove('hidden');
+            }
+
+            // Function to show the modal with a specific message
+            function showModal(message) {
+                modalMessage.textContent = message;
+                modalContainer.classList.remove('hidden');
+            }
+
+            // Event listeners for navigation
+            startSchedulingBtn.addEventListener('click', () => {
+                showSection(step1);
+            });
+            navScheduleBtn.addEventListener('click', () => {
+                showSection(step1);
+            });
+
+            bookNowBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    showSection(step2);
+                });
+            });
+
+            nextToStep3Btn.addEventListener('click', () => {
+                showSection(step3);
+            });
+
+            confirmBtn.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent form submission for now
+                showSection(success);
+            });
+
+            backToStep1Btn.addEventListener('click', () => {
+                showSection(step1);
+            });
+
+            backToStep2Btn.addEventListener('click', () => {
+                showSection(step2);
+            });
+
+            // Event listeners for the modal
+            addToCalendarBtn.addEventListener('click', () => {
+                const message = "This button will generate an .ics file that can be saved to your device and opened with your calendar app to save the appointment.";
+                showModal(message);
+            });
+
+            modalCloseBtn.addEventListener('click', () => {
+                modalContainer.classList.add('hidden');
+            });
+
+            // "Buttons to nowhere" popups
+            startSchedulingBtn.addEventListener('click', () => {
+                showSection(step1);
+            });
+            navScheduleBtn.addEventListener('click', () => {
+                showSection(step1);
+            });
+        });
+    </script>
+    <!-- Remember to save and backup. -->
+</body>
+</html>
